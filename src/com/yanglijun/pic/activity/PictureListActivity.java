@@ -9,23 +9,28 @@ import com.yanglijun.pic.presenter.IPicturePresenter;
 import com.yanglijun.pic.presenter.PicturePresenter;
 import com.yanglijun.pic.view.IPictureView;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressLint("ResourceAsColor")
 public class PictureListActivity extends Activity implements IPictureView {
 	IPicturePresenter presenter;
 	private List<Picture>pictures;
 	private PictureListAdapter adapter;
-	private GridView gvPicture;
+//	private ListView lvPicture;
+	private Gallery gallery;
 	private TextView tvTitle;
 	private int Id;
 	private ImageView ivShare,ivReturn;
@@ -41,7 +46,7 @@ public class PictureListActivity extends Activity implements IPictureView {
 		initView();
 		setListener();
 		tvTitle.setText(title);
-		Toast.makeText(this, "传来的ID是："+id+"传来的title是："+title, Toast.LENGTH_LONG).show();
+//		Toast.makeText(this, "传来的ID是："+id+"传来的title是："+title, Toast.LENGTH_LONG).show();
 		
 	}
 
@@ -67,16 +72,30 @@ public class PictureListActivity extends Activity implements IPictureView {
 		});
 		
 		
-		gvPicture.setOnItemClickListener(new OnItemClickListener() {
+		
+		
+		//长按显示菜单，保存图片
+		gallery.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent=new Intent(PictureListActivity.this,GalleryActivity.class);
-				intent.putExtra("ID", Id);
-				startActivity(intent);
-				
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				Picture picture=pictures.get(position);
+//				Toast.makeText(PictureListActivity.this, "我点击了"+position, Toast.LENGTH_LONG).show();
+				AlertDialog.Builder builder=new AlertDialog.Builder(PictureListActivity.this);
+				builder.setItems(new String[]{getResources().getString(R.string.save_picture)},new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						gallery.setDrawingCacheEnabled(true);
+						Toast.makeText(PictureListActivity.this, "你想的真美~",Toast.LENGTH_SHORT ).show();
+					}
+				}) ;
+				builder.show();
+				return true;
 			}
 		});
+		
+		
 		
 	}
 
@@ -92,7 +111,8 @@ public class PictureListActivity extends Activity implements IPictureView {
 
 
 	private void initView() {
-		gvPicture=(GridView) findViewById(R.id.gv_showPic);
+//		lvPicture=(ListView) findViewById(R.id.iv_showPic);
+		gallery=(Gallery) findViewById(R.id.iv_showPic);
 		tvTitle=(TextView) findViewById(R.id.tv_title);
 		ivReturn=(ImageView) findViewById(R.id.iv_return);
 		ivShare=(ImageView) findViewById(R.id.iv_share);
@@ -103,7 +123,8 @@ public class PictureListActivity extends Activity implements IPictureView {
 	public void showPicture(List<Picture> pictures) {
 		this.pictures=pictures;
 		adapter=new PictureListAdapter(PictureListActivity.this, pictures);
-		gvPicture.setAdapter(adapter);
+//		lvPicture.setAdapter(adapter);
+		gallery.setAdapter(adapter);
 	}
 
 }

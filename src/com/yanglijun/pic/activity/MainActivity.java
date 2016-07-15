@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -101,6 +102,7 @@ public class MainActivity extends Activity implements IPhotoView,IPhotoNameView{
 		
 		
 		
+		
 		gvPic.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,6 +114,21 @@ public class MainActivity extends Activity implements IPhotoView,IPhotoNameView{
 				intent.putExtra("title", title);
 				startActivity(intent);
 				
+				
+			}
+		});
+		
+		gvPic.setOnScrollListener(new OnScrollListener() {
+			
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				// TODO Auto-generated method stub
 				
 			}
 		});

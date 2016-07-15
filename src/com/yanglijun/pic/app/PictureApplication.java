@@ -34,7 +34,7 @@ public class PictureApplication extends Application {
 		
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
 				this)
-				 .memoryCacheExtraOptions(480, 800)
+				 .memoryCacheExtraOptions(400, 800)
 				.threadPoolSize(3)
 				.threadPriority(Thread.NORM_PRIORITY - 2)
 				.denyCacheImageMultipleSizesInMemory()

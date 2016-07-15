@@ -28,7 +28,7 @@
         </activity>
         <activity
             android:name="com.yanglijun.pic.activity.PictureListActivity"
-            android:label="@string/title_activity_picture_list" >
+            android:label="@string/title_activity_picture_list" android:theme="@android:style/Theme.Holo.Light.NoActionBar">
         </activity>
         <activity
             android:name="com.yanglijun.pic.activity.GalleryActivity"

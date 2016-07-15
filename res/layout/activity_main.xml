@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
-                android:text="BlueMor"
+                android:text="绅士"
                 android:textColor="#ffffff"
                 android:textSize="25sp" />
         </LinearLayout>
@@ -94,7 +94,7 @@
             android:layout_below="@id/rl_title"
             android:cacheColorHint="#00000000"
             android:numColumns="2"
-            android:verticalSpacing="20dp" >
+            >
         </GridView>
 
         <TextView

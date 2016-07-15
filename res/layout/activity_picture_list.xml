@@ -15,14 +15,14 @@
         android:gravity="center"
         android:background="#009990"
         />
-    <GridView 
+    <Gallery 
         android:layout_below="@+id/tv_title"
-        android:id="@+id/gv_showPic"
-        android:numColumns="2"
+        android:id="@+id/iv_showPic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        
-        ></GridView>
+        android:spacing="20dp"
+        android:background="#000000"
+        ></Gallery >
 
     <ImageView
         android:id="@+id/iv_share"
