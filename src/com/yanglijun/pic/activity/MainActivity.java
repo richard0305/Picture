@@ -3,6 +3,8 @@ package com.yanglijun.pic.activity;
 import java.util.List;
 
 import com.nineoldandroids.view.ViewHelper;
+import com.yanglijun.news_v1.entity.Joke;
+import com.yanglijun.news_v1.model.JokeModel.Callback;
 import com.yanglijun.pic.R;
 import com.yanglijun.pic.adapter.PhotoAdapter;
 import com.yanglijun.pic.adapter.PhotoNameAdapter;
@@ -24,12 +26,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements IPhotoView,IPhotoNameView{
 	DragLayout dl;
@@ -38,7 +42,7 @@ public class MainActivity extends Activity implements IPhotoView,IPhotoNameView{
 	private ImageView ivbottom,icon;
 	private  int position;
 	private List<Photo>photos;
-	private int page=2;
+	private int page=1;
 	private List<PhotoName>photoNames;
 	IPhotoPresenter presenter;
 	IPhotoNamePresenter photoNamePresenter;
@@ -46,6 +50,7 @@ public class MainActivity extends Activity implements IPhotoView,IPhotoNameView{
 	private PhotoNameAdapter photoNameAdapter;
 	private TextView tvPhotoTitle;
 	private PhotoName photoName;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -120,16 +125,36 @@ public class MainActivity extends Activity implements IPhotoView,IPhotoNameView{
 		
 		gvPic.setOnScrollListener(new OnScrollListener() {
 			
+			private boolean isBottom=false;
+
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				// TODO Auto-generated method stub
-				
+				switch (scrollState) {
+				case SCROLL_STATE_FLING:
+
+					break;
+				case SCROLL_STATE_IDLE:
+					if (isBottom) {
+					
+						
+
+					}
+					break;
+				case SCROLL_STATE_TOUCH_SCROLL:
+					break;
+				}
+
 			}
-			
+
 			@Override
-			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-				// TODO Auto-generated method stub
-				
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+
+				if (firstVisibleItem + visibleItemCount == totalItemCount) {
+					isBottom = true;
+				} else {
+					isBottom = false;
+				}
 			}
 		});
 		
