@@ -37,7 +37,6 @@ public final class R {
     public static final class id {
         public static final int action_settings=0x7f090013;
         public static final int dl=0x7f090000;
-        public static final int gv_img=0x7f090008;
         public static final int imageView1=0x7f090011;
         public static final int iv_bottom=0x7f090002;
         public static final int iv_icon=0x7f090006;
@@ -48,6 +47,7 @@ public final class R {
         public static final int iv_showPic=0x7f09000b;
         public static final int ll1=0x7f090001;
         public static final int lv=0x7f090004;
+        public static final int recyclerview=0x7f090008;
         public static final int rl_title=0x7f090005;
         public static final int tvPhotoTitle=0x7f090007;
         public static final int tvTitle=0x7f090012;

@@ -3,11 +3,10 @@ package com.yanglijun.pic.activity;
 import java.util.List;
 
 import com.nineoldandroids.view.ViewHelper;
-import com.yanglijun.news_v1.entity.Joke;
-import com.yanglijun.news_v1.model.JokeModel.Callback;
 import com.yanglijun.pic.R;
 import com.yanglijun.pic.adapter.PhotoAdapter;
 import com.yanglijun.pic.adapter.PhotoNameAdapter;
+import com.yanglijun.pic.adapter.recyclerViewAdapter;
 import com.yanglijun.pic.entity.Photo;
 import com.yanglijun.pic.entity.PhotoName;
 import com.yanglijun.pic.presenter.IPhotoNamePresenter;
@@ -22,6 +21,8 @@ import com.yanglijun.pic.view.IPhotoView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,10 +34,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity implements IPhotoView,IPhotoNameView{
 	DragLayout dl;
+	private RecyclerView recyclerview;
 	private GridView gvPic;
 	private ListView lvContent;
 	private ImageView ivbottom,icon;
@@ -50,6 +51,7 @@ public class MainActivity extends Activity implements IPhotoView,IPhotoNameView{
 	private PhotoNameAdapter photoNameAdapter;
 	private TextView tvPhotoTitle;
 	private PhotoName photoName;
+	private recyclerViewAdapter recyclerviewAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +166,8 @@ public class MainActivity extends Activity implements IPhotoView,IPhotoNameView{
 
 	private void initView() {
 		dl=(DragLayout) findViewById(R.id.dl);
-		gvPic=(GridView) findViewById(R.id.gv_img);
+//		gvPic=(GridView) findViewById(R.id.gv_img);
+		recyclerview=(RecyclerView) findViewById(R.id.recyclerview);
 		lvContent=(ListView) findViewById(R.id.lv);
 		icon=(ImageView) findViewById(R.id.iv_icon);
 		ivbottom=(ImageView) findViewById(R.id.iv_bottom);
@@ -176,8 +179,12 @@ public class MainActivity extends Activity implements IPhotoView,IPhotoNameView{
 	public void showPhoto(List<Photo> photos) {
 		this.photos=photos;
 		
-		adapter=new PhotoAdapter(photos, MainActivity.this);
-		gvPic.setAdapter(adapter);
+//		adapter=new PhotoAdapter(photos, MainActivity.this);
+//		recyclerview.setAdapter(adapter);
+		recyclerviewAdapter=new recyclerViewAdapter(photos, this);
+		recyclerview.setAdapter(recyclerviewAdapter);
+		LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+		recyclerview.setLayoutManager(linearLayoutManager);
 		
 		
 	}
